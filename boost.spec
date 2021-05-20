@@ -232,7 +232,7 @@ PYTHON_FLAGS="--with-python-root=/usr --with-python-version=$PYTHON_VERSION"
 REGEX_FLAGS="--with-icu"
 ./bootstrap.sh $CONFIGURE_FLAGS $PYTHON_FLAGS $REGEX_FLAGS
 
-%ifarch %{arm}
+%ifarch %{arm} mipsel
 LONGDOUBLE="--disable-long-double"
 %else
 LONGDOUBLE=""

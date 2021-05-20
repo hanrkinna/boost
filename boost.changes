@@ -1,3 +1,6 @@
+* Sun Jan 22 2012 Carsten Munk <carsten.munk@gmail.com> - 1.39.0
+- MIPS doesn't have long double either.
+
 * Tue Jun 28 2011 Chris Ferron <chris.e.ferron@linux.intel.com> - 1.39.0
 - PACKAGE CLEANUP - Removed unnecessary Obsoletes  boost-python, boost-python-docs, boost-python-devel, boost-doc, and boost-devel-static as there is no other packages that Requires or provides them. 
 
