@@ -1,4 +1,7 @@
-* Thu Sep 25 2021 Marko Saukko <marko.saukko@jollamobile.com> - 1.51.0
+* Tue Jan 29 2013 Marco Martin <mart@kde.org> - 1.51.0
+- Updated libboost_thread-mt.so link information to 1.51.0
+
+* Thu Sep 25 2012 Marko Saukko <marko.saukko@jollamobile.com> - 1.51.0
 - Fixes MER#291: Update to boost 1.51.0
 - Added new subpackages: -chrono, -context, -locale, -random, -timer, 
   -build and -jam
