@@ -1,3 +1,6 @@
+* Tue Jan 07 2014 Carsten Munk <carsten.munk@jolla.com> - 1.51.0
+- Fix build under eglibc 2.18
+
 * Tue Jan 29 2013 Marco Martin <mart@kde.org> - 1.51.0
 - Updated libboost_thread-mt.so link information to 1.51.0
 

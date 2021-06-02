@@ -17,6 +17,7 @@ Patch1: boost-no_type_punning.patch
 Patch2: boost-strict_aliasing.patch
 Patch3: boost-thread.patch
 Patch4: boost-use_std_xml_catalog.patch
+Patch5: 200-cstdint_missing_include.patch
 
 %define sonamever %{version}
 
@@ -292,6 +293,7 @@ a number of significant features and is now developed independently
 %patch2 -p0
 %patch3 -p0
 %patch4 -p0
+%patch5 -p1
 
 # At least python2_version needs to be a macro so that it's visible in
 # %%install as well.
