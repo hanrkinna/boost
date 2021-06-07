@@ -1,3 +1,13 @@
+%ifnarch %{ix86} x86_64
+  # Avoid using Boost.Context on non-x86 arches.  s390 is not
+  # supported at all and there were _syntax errors_ in PPC code.  This
+  # should be enabled on a case-by-case basis as the arches are tested
+  # and fixed.
+  %bcond_with context
+%else
+  %bcond_without context
+%endif
+
 Name: boost
 Summary: The free peer-reviewed portable C++ source libraries
 Version: 1.51.0
@@ -52,6 +62,7 @@ Group: System Environment/Libraries
 
 Run-Time support for Boost.Chrono, a set of useful time utilities.
 
+%if %{with context}
 %package context
 Summary: Run-Time component of boost context library
 Group: System Environment/Libraries
@@ -59,6 +70,7 @@ Group: System Environment/Libraries
 %description context
 
 Run-Time support for Boost Context
+%endif
 
 %package date-time
 Summary: Run-Time component of boost date-time library
@@ -224,6 +236,9 @@ pre-processor functionality.
 Summary: The Boost C++ headers and shared development libraries
 Group: Development/Libraries
 Requires: boost-chrono = %{version}-%{release}
+%if %{with context}
+Requires: boost-context = %{version}-%{release}
+%endif
 Requires: boost-date-time = %{version}-%{release}
 Requires: boost-filesystem = %{version}-%{release}
 Requires: boost-graph = %{version}-%{release}
@@ -319,6 +334,9 @@ a number of significant features and is now developed independently
 echo ============================= build serial ==================
 ./b2 -d+2 -q %{?_smp_mflags} --layout=tagged \
 	--without-mpi --without-graph_parallel --build-dir=serial \
+%if !%{with context}
+	--without-context \
+%endif
 	variant=release threading=single,multi debug-symbols=on pch=off \
 	python=%{python2_version} stage
 
@@ -338,6 +356,9 @@ cd %{_builddir}/%{toplev_dirname}
 echo ============================= install serial ==================
 ./b2 -d+2 -q %{?_smp_mflags} --layout=tagged \
 	--without-mpi --without-graph_parallel --build-dir=serial \
+%if !%{with context}
+	--without-context \
+%endif
 	--prefix=$RPM_BUILD_ROOT%{_prefix} \
 	--libdir=$RPM_BUILD_ROOT%{_libdir} \
 	variant=release threading=single,multi debug-symbols=on pch=off \
@@ -399,9 +420,11 @@ rm -rf $RPM_BUILD_ROOT
 
 %postun chrono -p /sbin/ldconfig
 
+%if %{with context}
 %post context -p /sbin/ldconfig
 
 %postun context -p /sbin/ldconfig
+%endif
 
 %post date-time -p /sbin/ldconfig
 
@@ -478,11 +501,13 @@ rm -rf $RPM_BUILD_ROOT
 %doc LICENSE_1_0.txt
 %{_libdir}/libboost_chrono*.so.%{sonamever}
 
+%if %{with context}
 %files context
 %defattr(-, root, root, -)
 %doc LICENSE_1_0.txt
 %{_libdir}/libboost_context.so.%{sonamever}
 %{_libdir}/libboost_context-mt.so.%{sonamever}
+%endif
 
 %files date-time
 %defattr(-, root, root, -)

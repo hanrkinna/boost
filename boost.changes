@@ -1,3 +1,6 @@
+* Wed Feb 19 2014 Oleg Girko <oleg.girko@jolla.com> - 1.51.0
+- Disable build of context and coroutine libraries on non-x86 arches
+
 * Tue Jan 07 2014 Carsten Munk <carsten.munk@jolla.com> - 1.51.0
 - Fix build under eglibc 2.18
 
